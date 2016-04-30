@@ -1,0 +1,41 @@
+<%= form_for @wing_order, html: { class: "new_wing_order", id: "new_wing_order" } do |f| %>
+
+  <div class="row">
+    <%= f.label :customer_name, "Full Name" %>
+    <%= f.text_field :customer_name %>
+  </div>
+
+  <div class="row">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="row">
+    <%= f.label :state %>
+    <%= f.collection_select(:state, @state_collection, :last, :first) %>
+  </div>
+
+  <div class="row">
+    <%= f.label :quantity %>
+    <%= f.collection_radio_buttons(:quantity, @quantity_collection, :first, :last) %>
+  </div>
+
+  <div class="row">
+    <%= f.label :ranch_dressing, "Add Ranch Dressing" %>
+    <%= f.check_box("ranch_dressing") %>
+  </div>
+
+  <div class="row">
+    <%= f.label :wing_order_flavor_ids, "Flavors" %>
+
+    <%= f.collection_check_boxes(:flavor_ids, @flavor_collection, :id, :name) %>
+  </div>
+
+  <div class="row">
+    <% if controller.action_name == "edit" %>
+      <input type="submit" name="commit" value="Edit Order">
+    <% else %>
+      <input type="submit" name="commit" value="Place Order">
+    <% end %>
+  </div>
+<% end %>
